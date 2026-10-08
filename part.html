@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>MOTOMOD — Hasil</title>
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+
+        body {
+            background: #0b0b0b;
+            color: white;
+            min-height: 100vh;
+        }
+
+
+        /* NAVBAR */
+
+        nav {
+            height: 75px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 7%;
+            border-bottom: 1px solid #242424;
+        }
+
+
+        .logo {
+            font-size: 25px;
+            font-weight: 900;
+            letter-spacing: 2px;
+        }
+
+
+        .logo span {
+            color: #ff3b30;
+        }
+
+
+        .back {
+            color: #aaa;
+            text-decoration: none;
+        }
+
+
+        .back:hover {
+            color: white;
+        }
+
+
+        /* HEADER */
+
+        .header {
+            width: min(1100px, 90%);
+            margin: auto;
+            padding: 60px 0 35px;
+        }
+
+
+        .small {
+            color: #ff3b30;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+        }
+
+
+        h1 {
+            font-size: clamp(40px, 7vw, 70px);
+            line-height: .95;
+            margin-bottom: 25px;
+        }
+
+
+        h1 span {
+            color: #ff3b30;
+        }
+
+
+        /* TAG */
+
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+
+        .tag {
+            background: #171717;
+            border: 1px solid #292929;
+            padding: 10px 15px;
+            border-radius: 50px;
+            color: #aaa;
+            font-size: 13px;
+        }
+
+
+        .tag strong {
+            color: white;
+        }
+
+
+        /* CONTENT */
+
+        .content {
+            width: min(1100px, 90%);
+            margin: auto;
+            padding-bottom: 80px;
+        }
+
+
+        .result-top {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+
+        .result-top h2 {
+            font-size: 20px;
+        }
+
+
+        #jumlah {
+            color: #777;
+            font-size: 13px;
+        }
+
+
+        /* PRODUCTS */
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+
+        .product {
+            background: #151515;
+            border: 1px solid #292929;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: .2s;
+        }
+
+
+        .product:hover {
+            transform: translateY(-5px);
+            border-color: #555;
+        }
+
+
+        .product-image {
+            height: 220px;
+            background: #202020;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+
+        .product-info {
+            padding: 20px;
+        }
+
+
+        .category {
+            color: #ff3b30;
+            font-size: 11px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+
+        .product h3 {
+            font-size: 17px;
+            margin-bottom: 10px;
+        }
+
+
+        .description {
+            color: #777;
+            font-size: 12px;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+
+        .price {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+
+        .detail-button {
+            display: block;
+            text-align: center;
+            text-decoration: none;
+            margin-top: 18px;
+            padding: 12px;
+            border-radius: 8px;
+            background: #242424;
+            color: white;
+        }
+
+
+        .detail-button:hover {
+            background: #ff3b30;
+        }
+
+
+        /* EMPTY */
+
+        .empty {
+            text-align: center;
+            padding: 70px 20px;
+            background: #151515;
+            border: 1px solid #292929;
+            border-radius: 15px;
+        }
+
+
+        .empty p {
+            color: #777;
+            margin: 15px 0 25px;
+        }
+
+
+        .back-button {
+            display: inline-block;
+            background: #ff3b30;
+            color: white;
+            text-decoration: none;
+            padding: 13px 25px;
+            border-radius: 8px;
+        }
+
+
+        /* MOBILE */
+
+        @media (max-width: 800px) {
+
+            .products {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+
+        @media (max-width: 550px) {
+
+            .products {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- NAVBAR -->
+
+    <nav>
+
+        <div class="logo">
+            MOTO<span>MOD</span>
+        </div>
+
+        <a
+            href="index.html"
+            class="back"
+        >
+            ← Kembali
+        </a>
+
+    </nav>
+
+
+    <!-- HEADER -->
+
+    <header class="header">
+
+        <div class="small">
+            REKOMENDASI PART
+        </div>
+
+
+        <h1>
+            PART UNTUK<br>
+            <span id="judulMotor">
+                MOTOR KAMU
+            </span>
+        </h1>
+
+
+        <div class="filters">
+
+            <div class="tag">
+                Motor:
+                <strong id="infoMotor">-</strong>
+            </div>
+
+
+            <div class="tag">
+                Part:
+                <strong id="infoPart">-</strong>
+            </div>
+
+
+            <div class="tag">
+                Budget:
+                <strong id="infoBudget">-</strong>
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- CONTENT -->
+
+    <main class="content">
+
+        <div class="result-top">
+
+            <h2>
+                Produk yang cocok
+            </h2>
+
+            <div id="jumlah">
+                0 produk
+            </div>
+
+        </div>
+
+
+        <div
+            class="products"
+            id="products"
+        ></div>
+
+
+        <div
+            class="empty"
+            id="empty"
+            style="display:none;"
+        >
+
+            <h2>
+                Produk belum tersedia
+            </h2>
+
+            <p>
+                Belum ada part yang cocok
+                dengan pilihan kamu.
+            </p>
+
+
+            <a
+                href="index.html"
+                class="back-button"
+            >
+                ← Ubah Pilihan
+            </a>
+
+        </div>
+
+    </main>
+
+
+    <script>
+
+
+        // =========================
+        // AMBIL DATA DARI URL
+        // =========================
+
+        const params =
+            new URLSearchParams(
+                window.location.search
+            );
+
+
+        const motor =
+            params.get("motor");
+
+
+        const part =
+            params.get("part");
+
+
+        const budget =
+            params.get("budget");
+
+
+        // =========================
+        // TAMPILKAN PILIHAN
+        // =========================
+
+        document
+            .getElementById("infoMotor")
+            .textContent = motor || "-";
+
+
+        document
+            .getElementById("infoPart")
+            .textContent = part || "-";
+
+
+        document
+            .getElementById("infoBudget")
+            .textContent = budget || "-";
+
+
+        document
+            .getElementById("judulMotor")
+            .textContent =
+            motor || "MOTOR KAMU";
+
+
+        // =========================
+        // DATABASE PRODUK
+        // =========================
+
+        const produk = [
+
+
+            // ======================
+            // BEAT - KNALPOT
+            // ======================
+
+            {
+                nama: "Knalpot Racing Beat",
+                motor: "Honda Beat",
+                part: "Knalpot",
+                budget: "Pelajar",
+                harga: 650000,
+                gambar: "https://images.unsplash.com/photo-1558981806-ec527fa84c39",
+
+                // LINK AFFILIATE
+                link: "https://vt.tokopedia.com/t/ZS9Dqu8j4x9jn-6pZo9/"
+            },
+
+
+            {
+                nama: "Knalpot Premium Beat",
+                motor: "Honda Beat",
+                part: "Knalpot",
+                budget: "Sultan",
+                harga: 2500000,
+                gambar: "https://images.unsplash.com/photo-1558980664-10ea7b4b8b0e",
+
+                // LINK AFFILIATE
+                link: "https://LINK-AFFILIATE-BEAT-KNALPOT-SULTAN"
+            },
+
+
+            // ======================
+            // BEAT - VELG
+            // ======================
+
+            {
+                nama: "Velg Racing Beat",
+                motor: "Honda Beat",
+                part: "Velg",
+                budget: "Pelajar",
+                harga: 900000,
+                gambar: "https://images.unsplash.com/photo-1558980394-0c1fba1c8b0b",
+
+                // LINK AFFILIATE
+                link: "https://LINK-AFFILIATE-BEAT-VELG-PELAJAR"
+            },
+
+
+            {
+                nama: "Velg Premium Beat",
+                motor: "Honda Beat",
+                part: "Velg",
+                budget: "Sultan",
+                harga: 3500000,
+                gambar: "https://images.unsplash.com/photo-1558981359-219d6364c9c8",
+
+                // LINK AFFILIATE
+                link: "https://LINK-AFFILIATE-BEAT-VELG-SULTAN"
+            },
+
+
+            // ======================
+            // MIO - KNALPOT
+            // ======================
+
+            {
+                nama: "Knalpot Racing Mio",
+                motor: "Yamaha Mio",
+                part: "Knalpot",
+                budget: "Pelajar",
+                harga: 850000,
+                gambar: "https://images.unsplash.com/photo-1558981806-ec527fa84c39",
+
+                // LINK AFFILIATE
+                link: "https://LINK-AFFILIATE-MIO-KNALPOT-PELAJAR"
+            },
+
+
+            {
+                nama: "Knalpot Premium Mio",
+                motor: "Yamaha Mio",
+                part: "Knalpot",
+                budget: "Sultan",
+                harga: 2800000,
+                gambar: "https://images.unsplash.com/photo-1558980664-10ea7b4b8b0e",
+
+                // LINK AFFILIATE
+                link: "https://LINK-AFFILIATE-MIO-KNALPOT-SULTAN"
+            },
+
+
+            // ======================
+            // MIO - VELG
+            // ======================
+
+            {
+                nama: "Velg Racing Mio",
+                motor: "Yamaha Mio",
+                part: "Velg",
+                budget: "Pelajar",
+                harga: 950000,
+                gambar: "https://images.unsplash.com/photo-1558980394-0c1fba1c8b0b",
+
+                // LINK AFFILIATE
+                link: "https://LINK-AFFILIATE-MIO-VELG-PELAJAR"
+            },
+
+
+            {
+                nama: "Velg Premium Mio",
+                motor: "Yamaha Mio",
+                part: "Velg",
+                budget: "Sultan",
+                harga: 4500000,
+                gambar: "https://images.unsplash.com/photo-1558981359-219d6364c9c8",
+
+                // LINK AFFILIATE
+                link: "https://LINK-AFFILIATE-MIO-VELG-SULTAN"
+            },
+
+
+            // ======================
+            // VARIO - KNALPOT
+            // ======================
+
+            {
+                nama: "Knalpot Racing Vario",
+                motor: "Honda Vario",
+                part: "Knalpot",
+                budget: "Pelajar",
+                harga: 900000,
+                gambar: "https://images.unsplash.com/photo-1558981806-ec527fa84c39",
+
+                // LINK AFFILIATE
+                link: "https://LINK-AFFILIATE-VARIO-KNALPOT-PELAJAR"
+            },
+
+
+            {
+                nama: "Knalpot Premium Vario",
+                motor: "Honda Vario",
+                part: "Knalpot",
+                budget: "Sultan",
+                harga: 3000000,
+                gambar: "https://images.unsplash.com/photo-1558980664-10ea7b4b8b0e",
+
+                // LINK AFFILIATE
+                link: "https://LINK-AFFILIATE-VARIO-KNALPOT-SULTAN"
+            },
+
+
+            // ======================
+            // VARIO - VELG
+            // ======================
+
+            {
+                nama: "Velg Racing Vario",
+                motor: "Honda Vario",
+                part: "Velg",
+                budget: "Pelajar",
+                harga: 1000000,
+                gambar: "https://images.unsplash.com/photo-1558980394-0c1fba1c8b0b",
+
+                // LINK AFFILIATE
+                link: "https://LINK-AFFILIATE-VARIO-VELG-PELAJAR"
+            },
+
+
+            {
+                nama: "Velg Premium Vario",
+                motor: "Honda Vario",
+                part: "Velg",
+                budget: "Sultan",
+                harga: 4000000,
+                gambar: "https://images.unsplash.com/photo-1558981359-219d6364c9c8",
+
+                // LINK AFFILIATE
+                link: "https://LINK-AFFILIATE-VARIO-VELG-SULTAN"
+            },
+
+
+            // ======================
+            // AEROX - KNALPOT
+            // ======================
+
+            {
+                nama: "Knalpot Racing Aerox",
+                motor: "Yamaha Aerox",
+                part: "Knalpot",
+                budget: "Pelajar",
+                harga: 1100000,
+                gambar: "https://images.unsplash.com/photo-1558981806-ec527fa84c39",
+
+                // LINK AFFILIATE
+                link: "https://LINK-AFFILIATE-AEROX-KNALPOT-PELAJAR"
+            },
+
+
+            {
+                nama: "Knalpot Premium Aerox",
+                motor: "Yamaha Aerox",
+                part: "Knalpot",
+                budget: "Sultan",
+                harga: 3500000,
+                gambar: "https://images.unsplash.com/photo-1558980664-10ea7b4b8b0e",
+
+                // LINK AFFILIATE
+                link: "https://LINK-AFFILIATE-AEROX-KNALPOT-SULTAN"
+            },
+
+
+            // ======================
+            // AEROX - VELG
+            // ======================
+
+            {
+                nama: "Velg Racing Aerox",
+                motor: "Yamaha Aerox",
+                part: "Velg",
+                budget: "Pelajar",
+                harga: 1300000,
+                gambar: "https://images.unsplash.com/photo-1558980394-0c1fba1c8b0b",
+
+                // LINK AFFILIATE
+                link: "https://LINK-AFFILIATE-AEROX-VELG-PELAJAR"
+            },
+
+
+            {
+                nama: "Velg Premium Aerox",
+                motor: "Yamaha Aerox",
+                part: "Velg",
+                budget: "Sultan",
+                harga: 5000000,
+                gambar: "https://images.unsplash.com/photo-1558981359-219d6364c9c8",
+
+                // LINK AFFILIATE
+                link: "https://LINK-AFFILIATE-AEROX-VELG-SULTAN"
+            }
+
+        ];
+
+
+        // =========================
+        // FILTER PRODUK
+        // =========================
+
+        const hasil =
+            produk.filter(item =>
+
+                item.motor === motor &&
+                item.part === part &&
+                item.budget === budget
+
+            );
+
+
+        // =========================
+        // ELEMENT HTML
+        // =========================
+
+        const productsContainer =
+            document.getElementById("products");
+
+
+        const empty =
+            document.getElementById("empty");
+
+
+        const jumlah =
+            document.getElementById("jumlah");
+
+
+        // =========================
+        // JUMLAH PRODUK
+        // =========================
+
+        jumlah.textContent =
+            hasil.length + " produk";
+
+
+        // =========================
+        // TAMPILKAN PRODUK
+        // =========================
+
+        if (hasil.length === 0) {
+
+            empty.style.display = "block";
+
+        } else {
+
+
+            hasil.forEach(item => {
+
+
+                const card =
+                    document.createElement("div");
+
+
+                card.className =
+                    "product";
+
+
+                card.innerHTML = `
+
+                    <div class="product-image">
+
+                        <img
+                            src="${item.gambar}"
+                            alt="${item.nama}"
+                        >
+
+                    </div>
+
+
+                    <div class="product-info">
+
+                        <div class="category">
+                            ${item.part}
+                        </div>
+
+
+                        <h3>
+                            ${item.nama}
+                        </h3>
+
+
+                        <div class="description">
+
+                            Cocok untuk
+                            ${item.motor}.
+
+                            Kategori budget:
+                            ${item.budget}.
+
+                        </div>
+
+
+                        <div class="price">
+
+                            Rp
+                            ${item.harga.toLocaleString("id-ID")}
+
+                        </div>
+
+
+                        <a
+                            href="${item.link}"
+                            class="detail-button"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            🛒 BELI SEKARANG
+                        </a>
+
+                    </div>
+
+                `;
+
+
+                productsContainer
+                    .appendChild(card);
+
+            });
+
+        }
+
+    </script>
+
+</body>
+</html>
